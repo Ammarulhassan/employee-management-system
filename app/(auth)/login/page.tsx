@@ -17,7 +17,10 @@ export default function LoginPage() {
     });
     setLoading(false);
     if (res.ok) router.push("/dashboard");
-    else { const d = await res.json(); setError(d.error || "Login failed"); }
+    else {
+      try { const d = await res.json(); setError(d.error || "Login failed"); }
+      catch { setError("Login failed"); }
+    }
   }
 
   return (

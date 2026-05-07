@@ -18,9 +18,11 @@ export default function SignupPage() {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: form.name, email: form.email, password: form.password, role: form.role }),
     });
-    const data = await res.json(); setLoading(false);
     if (res.ok) router.push("/dashboard");
-    else setError(data.error || "Signup failed");
+    else {
+      try { const data = await res.json(); setError(data.error || "Signup failed"); }
+      catch { setError("Signup failed"); }
+    }
   }
 
   return (
