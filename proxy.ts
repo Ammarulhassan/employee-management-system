@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const protectedRoutes = ["/dashboard", "/employees", "/departments", "/salaries", "/profile"];
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isProtected = protectedRoutes.some((r) => pathname.startsWith(r));
 
